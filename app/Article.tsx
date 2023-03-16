@@ -1,3 +1,5 @@
+import ReadMoreButton from "./ReadMoreButton"
+
 interface ArticleProps{
   article: Article
 }
@@ -29,7 +31,9 @@ export default function Article({article}: ArticleProps){
           </footer>
         </div>
 
-
+        <ReadMoreButton 
+          article={article}
+        />
       </div>
     </article>
   )
