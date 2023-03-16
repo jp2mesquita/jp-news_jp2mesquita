@@ -1,5 +1,8 @@
 import { categories } from '../constants'
 import { fecthNews } from '../utils/fetchNews'
+import NewsList from './NewsList'
+import response from '../response.json'
+import sortNewsByImage from '../utils/sortNewsByImage'
 
 export const metadata = {
   title: 'TheBrabus News'
@@ -7,14 +10,15 @@ export const metadata = {
 
 export default async function Home (){
 
-  // const category = categories.join(',')
 
-  const news: NewsResponse = await fecthNews(categories.join(','))
+  const news: NewsResponse = sortNewsByImage(response) 
+  // || await fecthNews(categories.join(','))
 
-  console.log(news)
   return(
     <div>
-    {/* NewsList news */}
+      <NewsList 
+        news={news}
+      />
 
     </div>
   )
