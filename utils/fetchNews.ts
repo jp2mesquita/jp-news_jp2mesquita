@@ -2,12 +2,6 @@ import { gql } from 'graphql-request'
 import sortNewsByImage from './sortNewsByImage'
 
 
-// interface FecthNewsProps {
-//   category?: Category | string
-//   keywords?: string
-//   isDynamic?: boolean 
-// }
-
 export async function fecthNews( 
   category?: Category | string,
   keywords?: string,
@@ -53,7 +47,7 @@ export async function fecthNews(
   const res = await fetch('https://naunhof.stepzen.net/api/listening-lizard/__graphql', {
     method: 'POST',
     cache: isDynamic ? 'no-cache' : 'default',
-    next: isDynamic ? {revalidate: 0} : { revalidate: 60},
+    next: isDynamic ? {revalidate: 0} : { revalidate: 60 * 60 * 24 }, //1 day
     headers:{
       "Content-Type": "application/json",
       Authorization: `Apikey ${process.env.STEPZEN_API_KEY}`
@@ -69,12 +63,6 @@ export async function fecthNews(
     }
   )
 
-  console.log("Loading NEW DATA FROM API for category >>>>>",
-  category,
-  "and",
-  keywords
-  )
-
   const newsResponse = await res.json()
 
   // Sort function by images VS not images present
@@ -83,6 +71,3 @@ export async function fecthNews(
 
   return news
 }
-
-
-// stepzen import curl http://api.mediastack.com/v1/news?access_key=c009dba1756d90b3a5f611f5aa319efe&sources=business,sports
