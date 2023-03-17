@@ -16,7 +16,6 @@ export default function ReadMoreButton({article}: ReadMoreButtonProps) {
       .join("&")
 
     const url = `/article?${queryString}`
-    console.log(url)
     router.push(url)
   }
 

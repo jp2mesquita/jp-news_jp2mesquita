@@ -1,18 +1,29 @@
 "use client"
-import { notFound } from 'next/navigation'
+import { notFound, useSearchParams } from 'next/navigation'
 import LiveTimestamp from '../LiveTimestamp'
 
-interface ArticlePageProps {
-  searchParams?: Article
-}
+// interface ArticlePageProps {
+//   searchParams?: Article
+// }
 
- export default function ArticlePage({ searchParams }: ArticlePageProps){
+// { searchParams }: ArticlePageProps
+
+ export default function ArticlePage(){
+  
+  const searchParams = useSearchParams()
+
   if((searchParams && Object.entries(searchParams).length === 0) || !searchParams){
     return notFound()
   }
-  
-  const article: Article = searchParams
 
+  let article: Article = {} as Article
+
+  for (const [key, value] of searchParams?.entries()){
+    
+    article = {...article, [key]: value}
+  }
+
+  console.log(article)
   return(
     <article>
       <section className='flex flex-col lg:flex-row pb-24 px-0 lg:px-10'>
