@@ -47,7 +47,7 @@ export async function fecthNews(
   const res = await fetch('https://naunhof.stepzen.net/api/listening-lizard/__graphql', {
     method: 'POST',
     cache: isDynamic ? 'no-cache' : 'default',
-    next: isDynamic ? {revalidate: 0} : { revalidate: 30 }, //130 seconds
+    next: isDynamic ? {revalidate: 0} : { revalidate: 60 * 10 }, //10 minutes
     headers:{
       "Content-Type": "application/json",
       Authorization: `Apikey ${process.env.STEPZEN_API_KEY}`
