@@ -17,7 +17,7 @@ export async function fecthNews(
       myQuery(
         access_key: $access_key
         categories: $categories
-        countries: "gb"
+        countries: "br, us"
         sort: "published_desc"
         keywords: $keywords
         ) {
@@ -47,7 +47,7 @@ export async function fecthNews(
   const res = await fetch('https://naunhof.stepzen.net/api/listening-lizard/__graphql', {
     method: 'POST',
     cache: isDynamic ? 'no-cache' : 'default',
-    next: isDynamic ? {revalidate: 0} : { revalidate: 60 * 60 * 24 }, //1 day
+    next: isDynamic ? {revalidate: 0} : { revalidate: 30 }, //130 seconds
     headers:{
       "Content-Type": "application/json",
       Authorization: `Apikey ${process.env.STEPZEN_API_KEY}`
